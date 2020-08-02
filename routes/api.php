@@ -16,3 +16,10 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+// Routs for the APIs
+//Route::group(['middleware' => ['auth:api']], function () {
+    Route::get('books/show', 'BooksApiController@index');
+    Route::get('books/get/{id}', 'BooksApiController@get');
+    Route::get('update-token', 'ApiTokenController@update');
+//});

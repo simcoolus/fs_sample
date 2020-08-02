@@ -19,6 +19,13 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Auth::routes();
+Route::middleware(['auth'])->group(function () {
+    Route::get('/books', 'BooksController@index')->name('books');
 
-Route::get('/home', 'HomeController@index')->name('home');
+    // Add and edit book form in view
+    Route::get('/books/add', 'BooksFormController@createForm')->name('books.add');
+    Route::get('/books/edit/{id}', 'BooksFormController@updateForm')->name('books.edit');
+
+    // Post form data
+    Route::post('/books/save', 'BooksFormController@saveForm')->name('books.save');
+});
